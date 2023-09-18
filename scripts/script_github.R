@@ -34,7 +34,7 @@ usethis::use_git_config(user.name = "Paijani", user.email = "paijani.sheth@mail.
 usethis::git_sitrep()
 
 #create githuub token
-usethis::create_github_token() #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
+usethis::create_github_token() #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
 
 gitcreds::gitcreds_set()
 
