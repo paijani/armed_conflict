@@ -39,5 +39,5 @@ usethis::create_github_token() #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
 gitcreds::gitcreds_set()
 
 usethis::use_git()
-usethis::use_github
+usethis::use_github()
 
