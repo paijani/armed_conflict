@@ -36,8 +36,9 @@ usethis::git_sitrep()
 #create githuub token
 usethis::create_github_token() #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
 
+usethis::use_git()
+
 gitcreds::gitcreds_set()
 
-usethis::use_git()
 usethis::use_github()
 
