@@ -11,6 +11,7 @@ covs <- read.csv(here("original", "covariates.csv"), header = TRUE)
 source(here("scripts", "mat_mortality_script.R"))
 source(here("scripts", "disaster_script.R"))
 source(here("scripts", "clean_function_script.R"))
+source(here("scripts", "clean_conflict.R"))
 
 #put all data frames into list
 alllist <- list(covs, merged_data, disaster_cleaned, confdata)
