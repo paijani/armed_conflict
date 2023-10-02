@@ -1,3 +1,8 @@
+#libraries
+library(here)
+library(tidyr)
+library(dplyr)
+
 #edit script from disaster data cleaning script last week such that there is now variables: 
 #year, ISO, dummy variable for earthquake and dummy variable for drought
 
