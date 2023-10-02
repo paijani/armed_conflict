@@ -24,21 +24,7 @@ data$year <- as.numeric(data$year)
 #check if year is numeric
 class(data$year)
 
-#introduce myself to Git
-install.packages("usethis")
-library(usethis)
+write.csv(data, file = "clean_maternal.csv")
 
-usethis::use_git_config(user.name = "Paijani", user.email = "paijani.sheth@mail.utoronto.ca")
 
-#to confirm, generate a git situation-report, your user name and email should appear under Git config (global) 
-usethis::git_sitrep()
-
-#create githuub token
-usethis::create_github_token() #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
-
-usethis::use_git()
-
-gitcreds::gitcreds_set()
-
-usethis::use_github()
 
