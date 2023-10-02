@@ -6,10 +6,10 @@ library(here)
 here()
 
 #read in raw data
-rawdata <- read.csv(here("original", "disaster.csv"), header = TRUE)
+disaster <- read.csv(here("original", "disaster.csv"), header = TRUE)
 
 #use filter function to subset the data set to only include years 2000-2019 and disaster types "Earthquake" and "Drought"
-data <- rawdata %>%
+disaster_cleaned <- disaster %>%
   filter(Year >= 2000 & Year <=2019 & Disaster.Type %in% c("Earthquake", "Drought")) %>%
   select(c("Year", "ISO", "Disaster.Type")) %>%
   mutate(Drought = ifelse(Disaster.Type == "Drought",1,0),
