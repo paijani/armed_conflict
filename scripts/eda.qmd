@@ -23,7 +23,6 @@ source("./.Rprofile")
 ```{r}
 #exploratory analysis
 finaldata <- read.csv(here("clean", "finaldata.csv"), header = TRUE)
-#she did a ggplot of maternal more over year labeling armed conflict (0,1) in legend. she did this for each outcome. 
 
 ```
 
