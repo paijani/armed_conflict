@@ -1,0 +1,76 @@
+---
+title: "CHLH7001H F3: Statistical Programming and Computation in Health Data"
+author: "Week 4 In-class Assignment"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+
+```{r}
+#| label: load-packages
+#| include: false
+source("./.Rprofile")
+```
+#Load data
+```{r}
+#exploratory analysis
+finaldata <- read.csv(here("clean", "finaldata.csv"), header = TRUE)
+#she did a ggplot of maternal more over year labeling armed conflict (0,1) in legend. she did this for each outcome. 
+
+```
+
+#Check the class of each variable
+
+```{r}
+var_classes <- sapply(finaldata, class)
+var_classes
+```
+
+#Summary statistics 
+```{r}
+summary(finaldata)
+```
+
+#Visualization
+## Distribution of neonatal mortality by 
+```{r}
+# Create a barplot
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+
+my_plot <- ggplot(finaldata, aes(x=Drought)) + geom_histogram(fill = "thistle3") 
+my_plot
+```
+
+## Mortality trend for 2000-2019
+```{r}
+finaldata |>
+  ggplot(aes(x = year, y = Neonatal.mortality.rate, group = ISO)) +
+  geom_line(color = "skyblue") +
+  xlim(c(2000,2019)) +
+  labs(y = "Neonatal mortality", x = "Year") + 
+  theme_bw()
+```
+
+## Mortality trend for 2000-2019 by OECD
+
+```{r}
+finaldata |>
+  ggplot(aes(x = year, y = Maternal.Mortality.rate, group = ISO)) +
+  geom_line(aes(color = as.factor(armconf1)), alpha = 0.5) +
+  xlim(c(2000,2019)) +
+  scale_y_continuous(trans='log10') + 
+  labs(y = "Maternal mortality", x = "Year", color = "Armed conflict") + 
+  theme_bw()
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
