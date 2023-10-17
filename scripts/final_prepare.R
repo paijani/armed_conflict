@@ -20,7 +20,7 @@ lapply(alllist, FUN= summary)
 #merge all data frames in list
 finaldata <- alllist %>%
   reduce(left_join, by = c('ISO', 'year')) %>% #join all the columns together
-  subset(select = -c(OECD2023, country_name))
+  subset(select = -c(OECD2023))
 
 # Check if you have 20 rows of data for each country 
 
@@ -36,7 +36,7 @@ finaldata <- finaldata |>
          Earthquake = replace_na(Earthquake, 0),
          totdeath = replace_na(totdeath, 0))
 
-write.csv(finaldata, file = here("clean", "finaldata.csv"), row.names = FALSE)
+write.csv(finaldata, file = here("clean", "final_data.csv"), row.names = FALSE)
 
 dim(finaldata)
 names(finaldata)

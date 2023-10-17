@@ -13,13 +13,14 @@ Quarto enables you to weave together content and executable code into a finished
 
 When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
 
-
 ```{r}
 #| label: load-packages
 #| include: false
 source("./.Rprofile")
 ```
+
 #Load data
+
 ```{r}
 #exploratory analysis
 finaldata <- read.csv(here("clean", "finaldata.csv"), header = TRUE)
@@ -33,13 +34,14 @@ var_classes <- sapply(finaldata, class)
 var_classes
 ```
 
-#Summary statistics 
+#Summary statistics
+
 ```{r}
 summary(finaldata)
 ```
 
-#Visualization
-## Distribution of neonatal mortality by 
+#Visualization \## Distribution of neonatal mortality by
+
 ```{r}
 # Create a barplot
 library(ggplot2)
@@ -51,6 +53,7 @@ my_plot
 ```
 
 ## Mortality trend for 2000-2019
+
 ```{r}
 finaldata |>
   ggplot(aes(x = year, y = Neonatal.mortality.rate, group = ISO)) +
