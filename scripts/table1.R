@@ -43,8 +43,8 @@ label(data_2000$armconf1) <- "Armed conflict"
 #give units to GDP
 units(data_2000$GDP) <- "USD"
 
-table1(~ GDP + OECD + popdens + urban + agedep + male_edu + temp + Infant.mortality.rate + Neonatal.mortality.rate + Under.5.mortality.rate + 
+table1 <- table1(~ GDP + OECD + popdens + urban + agedep + male_edu + temp + Infant.mortality.rate + Neonatal.mortality.rate + Under.5.mortality.rate + 
          Maternal.Mortality.rate + Drought + Earthquake + totdeath | armconf1, data = data_2000, render.continuous = c(.="Median [Min, Max]"),
        overall=c(left="Total"))
 
-
+write.csv(table1, file = here("clean", "table1.csv"), row.names = FALSE)
