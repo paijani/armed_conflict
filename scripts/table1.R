@@ -12,7 +12,7 @@ library(boot)
 library(fastmap)
 
 #load final data that table 1 will be created from
-final_data <- read.csv(here("clean", "finaldata.csv"))
+final_data <- read.csv(here("clean", "final_data.csv"))
 
 #subset data to show for year 2000
 data_2000 <- subset(final_data, year=2000)
@@ -47,4 +47,4 @@ table1 <- table1(~ GDP + OECD + popdens + urban + agedep + male_edu + temp + Inf
          Maternal.Mortality.rate + Drought + Earthquake + totdeath | armconf1, data = data_2000, render.continuous = c(.="Median [Min, Max]"),
        overall=c(left="Total"))
 
-write.csv(table1, file = here("clean", "table1.csv"), row.names = FALSE)
+table1
