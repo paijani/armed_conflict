@@ -1,7 +1,9 @@
 #load libraries
 
 library(SimDesign)
-
+library(dplyr)
+library(tidyr)
+library(ggplot2)
 
 #Design
 Design <- createDesign(n = c(50, 500),
@@ -49,7 +51,7 @@ Analyse.adj <- function(condition, dat, fixed_objects = NULL) {
   mod <- glm(lung ~ coffee + smoke, data = dat, family = "binomial")
   beta <- coef(mod)[2]
   pval <- summary(mod)$coef[2,4]
-  ret <- c(unadj = unname(pval))
+  ret <- c(adj = unname(pval))
   ret
 }
 
@@ -59,18 +61,18 @@ Summarise <- function(condition, results, fixed_objects = NULL){
   ret
 }
 
-res <- runSimulation(Design, replications = 10,
+res <- runSimulation(design = Design, replications = 1000,
                          parallel = TRUE, 
                          generate = Generate,
-                         analyse = Analyse.unadj, Analyse,adj,
-                         summarise = Summarise)
+                         analyse = list(Analyse.unadj, Analyse.adj),
+                         summarise = Summarise, save_results = TRUE)
 
-head(results)
+head(res)
 
 # Create a plot that summarizes the results
 
-reslong <- results %>%
-  pivot_longer(cols = c("unadj.p", "adj.p"),
+reslong <- res %>%
+  pivot_longer(cols = c("unadj", "adj"),
                names_to = "model",
                values_to = "edr")
 
