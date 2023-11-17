@@ -183,6 +183,7 @@ table0 <- data.frame(
 table
 ```
 
+##Add title
 ```{r}
 table <- flextable(table0)
 table <- add_header_row(
@@ -192,3 +193,11 @@ table <- theme_box(table)
 
 table
 ```
+# Export as pdf and save it in "figures" folder in armed conflict folder
+
+```{r}
+#save as pdf
+save_as_html(table, path = here("figures"), title = "mortality_ci_table")
+```
+
+

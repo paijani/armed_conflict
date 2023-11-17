@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>boostrap</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="bootstrap_week10_files/libs/clipboard/clipboard.min.js"></script>
+<script src="bootstrap_week10_files/libs/quarto-html/quarto.js"></script>
+<script src="bootstrap_week10_files/libs/quarto-html/popper.min.js"></script>
+<script src="bootstrap_week10_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="bootstrap_week10_files/libs/quarto-html/anchor.min.js"></script>
+<link href="bootstrap_week10_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="bootstrap_week10_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="bootstrap_week10_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="bootstrap_week10_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="bootstrap_week10_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="bootstrap_week10_files/libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+<script src="bootstrap_week10_files/libs/tabwid-1.1.3/tabwid.js"></script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">boostrap</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>#Instructions</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a table (in HTML or PDF) that shows the differences in median (with the BCa bootstrap </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#95% confidence intervals) maternal, infant, neonatal, and under-5 mortality between the</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#countries exposed to versus not exposed to armed conflict for the year 2017. Be specific about</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#the sample sizes used in each statistic. The table should be fully reproducible. Push the</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#script that creates the table to your GitHub repository.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>#Clear history</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#clear history</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>(<span class="at">all=</span>T)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>#Load Libraries</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load libraries</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyr' was built under R version 4.2.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'here' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>here() starts at C:/Users/paija/OneDrive/Desktop/armed_conflict</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyverse' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'readr' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'purrr' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'stringr' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'forcats' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'lubridate' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ forcats   1.0.0     ✔ readr     2.1.4
+✔ ggplot2   3.4.2     ✔ stringr   1.5.0
+✔ lubridate 1.9.2     ✔ tibble    3.2.1
+✔ purrr     1.0.1     </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flextable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'flextable' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'flextable'
+
+The following object is masked from 'package:purrr':
+
+    compose</code></pre>
+</div>
+</div>
+<p>#Load datasets</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load final data</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">"clean"</span>, <span class="st">"final_data.csv"</span>), <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>data2017 <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2017</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(Maternal.Mortality.rate, Infant.mortality.rate, Under.<span class="fl">5.</span>mortality.rate, Neonatal.mortality.rate)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset the Data Frame for the year 2017</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>matmor.arm1 <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2017</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(Maternal.Mortality.rate) <span class="sc">&amp;</span> armconf1 <span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country_name, Maternal.Mortality.rate)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>matmor.arm0 <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2017</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(Maternal.Mortality.rate) <span class="sc">&amp;</span> armconf1 <span class="sc">==</span><span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country_name, Maternal.Mortality.rate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>#Perform bootstrap (traditional method)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>med.diff <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, B)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B){</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  resample.arm1 <span class="ot">&lt;-</span> matmor.arm1[<span class="fu">sample</span>(<span class="fu">nrow</span>(matmor.arm1), <span class="at">size =</span> <span class="fu">nrow</span>(matmor.arm1), <span class="at">replace =</span> <span class="cn">TRUE</span>),]</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  resample.arm0 <span class="ot">&lt;-</span> matmor.arm0[<span class="fu">sample</span>(<span class="fu">nrow</span>(matmor.arm0), <span class="at">size =</span> <span class="fu">nrow</span>(matmor.arm0), <span class="at">replace =</span> <span class="cn">TRUE</span>),]</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  med.diff[b] <span class="ot">&lt;-</span> <span class="fu">median</span>(resample.arm1<span class="sc">$</span>Maternal.Mortality.rate) <span class="sc">-</span> <span class="fu">median</span>(resample.arm0<span class="sc">$</span>Maternal.Mortality.rate)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(resample.arm1, <span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     country_name Maternal.Mortality.rate
+8    Burkina Faso                     320
+31        Myanmar                     250
+33        Nigeria                     917
+43       Thailand                      37
+28           Mali                     562
+45         Turkey                      17
+12           Chad                    1140
+34       Pakistan                     140
+20         France                       8
+43.1     Thailand                      37
+24         Jordan                      46
+34.1     Pakistan                     140</code></pre>
+</div>
+</div>
+<p>##histogram of bootstrap distribution</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(med.diff, <span class="at">main =</span> <span class="st">"Distribution of boostrap statistic"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="bootstrap_week10_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>#Bootstrap using Boot package ##maternal mortality</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>getmeddiff <span class="ot">&lt;-</span> <span class="cf">function</span>(data, indices) {</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  sample_data <span class="ot">&lt;-</span> data[indices, ]</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  group_meds <span class="ot">&lt;-</span> <span class="fu">tapply</span>(sample_data<span class="sc">$</span>Maternal.Mortality.rate, sample_data<span class="sc">$</span>armconf1, <span class="at">FUN =</span> median)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  med.diff <span class="ot">&lt;-</span> group_meds[<span class="dv">2</span>] <span class="sc">-</span> group_meds[<span class="dv">1</span>]</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(med.diff)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>bootout_mat <span class="ot">&lt;-</span> <span class="fu">boot</span>(data2017, <span class="at">statistic =</span> getmeddiff, <span class="at">strata =</span> data2017<span class="sc">$</span>armconf1, <span class="at">R=</span><span class="dv">1000</span>)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>bootout_mat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+STRATIFIED BOOTSTRAP
+
+
+Call:
+boot(data = data2017, statistic = getmeddiff, R = 1000, strata = data2017$armconf1)
+
+
+Bootstrap Statistics :
+    original  bias    std. error
+t1*      125  19.411    65.27786</code></pre>
+</div>
+</div>
+<p>###bootstrap statistics</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#get confidence intervals</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>mat_ci <span class="ot">&lt;-</span> <span class="fu">boot.ci</span>(<span class="at">boot.out =</span> bootout_mat, <span class="at">conf =</span> <span class="fl">0.95</span>, <span class="at">type =</span> <span class="st">"bca"</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co">#bootstrap statistics for matmor: t1= 126.5, bias= 14.4095, SE= 64.77766, CI= 43.8, 290.3)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>##Infant Mortality</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#bootstrap for infant mor</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>getmeddiff <span class="ot">&lt;-</span> <span class="cf">function</span>(data, indices) {</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  sample_data <span class="ot">&lt;-</span> data[indices, ]</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  group_meds <span class="ot">&lt;-</span> <span class="fu">tapply</span>(sample_data<span class="sc">$</span>Infant.mortality.rate, sample_data<span class="sc">$</span>armconf1, <span class="at">FUN =</span> median)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  med.diff <span class="ot">&lt;-</span> group_meds[<span class="dv">2</span>] <span class="sc">-</span> group_meds[<span class="dv">1</span>]</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(med.diff)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>bootout_infant <span class="ot">&lt;-</span> <span class="fu">boot</span>(data2017, <span class="at">statistic =</span> getmeddiff, <span class="at">strata =</span> data2017<span class="sc">$</span>armconf1, <span class="at">R=</span><span class="dv">1000</span>)</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>bootout_infant</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+STRATIFIED BOOTSTRAP
+
+
+Call:
+boot(data = data2017, statistic = getmeddiff, R = 1000, strata = data2017$armconf1)
+
+
+Bootstrap Statistics :
+    original  bias    std. error
+t1*     19.8 -1.0346    6.003316</code></pre>
+</div>
+</div>
+<p>###bootstrap statistics</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#get confidence intervals</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>infant_ci <span class="ot">&lt;-</span> <span class="fu">boot.ci</span>(<span class="at">boot.out =</span> bootout_infant, <span class="at">conf =</span> <span class="fl">0.95</span>, <span class="at">type =</span> <span class="st">"bca"</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co">#bootstrap statistics for infant mor: t1= 19.8, bias= -0.9521, SE= 5.943379, CI= 6.60, 29.16)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>##Under 5 Mortality</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#bootstrap for under-5 mor</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>getmeddiff <span class="ot">&lt;-</span> <span class="cf">function</span>(data, indices) {</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  sample_data <span class="ot">&lt;-</span> data[indices, ]</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  group_meds <span class="ot">&lt;-</span> <span class="fu">tapply</span>(sample_data<span class="sc">$</span>Under.<span class="fl">5.</span>mortality.rate, sample_data<span class="sc">$</span>armconf1, <span class="at">FUN =</span> median)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  med.diff <span class="ot">&lt;-</span> group_meds[<span class="dv">2</span>] <span class="sc">-</span> group_meds[<span class="dv">1</span>]</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(med.diff)</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>bootout_under5 <span class="ot">&lt;-</span> <span class="fu">boot</span>(data2017, <span class="at">statistic =</span> getmeddiff, <span class="at">strata =</span> data2017<span class="sc">$</span>armconf1, <span class="at">R=</span><span class="dv">1000</span>)</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>bootout_under5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+STRATIFIED BOOTSTRAP
+
+
+Call:
+boot(data = data2017, statistic = getmeddiff, R = 1000, strata = data2017$armconf1)
+
+
+Bootstrap Statistics :
+    original  bias    std. error
+t1*     28.9 -2.6261    9.420962</code></pre>
+</div>
+</div>
+<p>###bootstrap statistics</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#get confidence intervals</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>under5_ci <span class="ot">&lt;-</span> <span class="fu">boot.ci</span>(<span class="at">boot.out =</span> bootout_under5, <span class="at">conf =</span> <span class="fl">0.95</span>, <span class="at">type =</span> <span class="st">"bca"</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co">#bootstrap statistics for Under mor: t1= 28.9, bias= -3.0935, SE= 9.678971, CI= 8.97, 45.68)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>##Neonatal Mortality</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#bootstrap for neomor</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>getmeddiff <span class="ot">&lt;-</span> <span class="cf">function</span>(data, indices) {</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  sample_data <span class="ot">&lt;-</span> data[indices, ]</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  group_meds <span class="ot">&lt;-</span> <span class="fu">tapply</span>(sample_data<span class="sc">$</span>Neonatal.mortality.rate, sample_data<span class="sc">$</span>armconf1, <span class="at">FUN =</span> median)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  med.diff <span class="ot">&lt;-</span> group_meds[<span class="dv">2</span>] <span class="sc">-</span> group_meds[<span class="dv">1</span>]</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(med.diff)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>bootout_neo <span class="ot">&lt;-</span> <span class="fu">boot</span>(data2017, <span class="at">statistic =</span> getmeddiff, <span class="at">strata =</span> data2017<span class="sc">$</span>armconf1, <span class="at">R=</span><span class="dv">1000</span>)</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>bootout_neo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+STRATIFIED BOOTSTRAP
+
+
+Call:
+boot(data = data2017, statistic = getmeddiff, R = 1000, strata = data2017$armconf1)
+
+
+Bootstrap Statistics :
+    original  bias    std. error
+t1*     12.4 -1.0904     3.41559</code></pre>
+</div>
+</div>
+<p>###boostrap statistics</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#get confidence intervals</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>neo_ci <span class="ot">&lt;-</span> <span class="fu">boot.ci</span>(<span class="at">boot.out =</span> bootout_neo, <span class="at">conf =</span> <span class="fl">0.95</span>, <span class="at">type =</span> <span class="st">"bca"</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co">#bootstrap statistics for neomor: t1= 12.4, bias= -0.8052, SE= 3.455128, CI= 5.4, 20.1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>#TABLE ## Create a data frame for each variable</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>table0 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Mortality_Group =</span> <span class="fu">c</span>(<span class="st">'maternal'</span>, <span class="st">'infant'</span>, <span class="st">'neonatal'</span>, <span class="st">'under5'</span>),</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Median_Difference =</span> <span class="fu">c</span>(bootout_mat<span class="sc">$</span>t0, bootout_infant<span class="sc">$</span>t0, bootout_under5<span class="sc">$</span>t0, bootout_neo<span class="sc">$</span>t0),</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Confidence_Interval_lower =</span> <span class="fu">c</span>(mat_ci<span class="sc">$</span>bca[<span class="dv">4</span>], infant_ci<span class="sc">$</span>bca[<span class="dv">4</span>], under5_ci<span class="sc">$</span>bca[<span class="dv">4</span>], neo_ci<span class="sc">$</span>bca[<span class="dv">4</span>]),</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Confidence_Interval_upper =</span> <span class="fu">c</span>(mat_ci<span class="sc">$</span>bca[<span class="dv">5</span>], infant_ci<span class="sc">$</span>bca[<span class="dv">5</span>], under5_ci<span class="sc">$</span>bca[<span class="dv">5</span>], neo_ci<span class="sc">$</span>bca[<span class="dv">5</span>]),</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">c</span>(<span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(data2017<span class="sc">$</span>Maternal.Mortality.rate)), <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(data2017<span class="sc">$</span>Neonatal.mortality.rate)), <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(data2017<span class="sc">$</span>Under.<span class="fl">5.</span>mortality.rate)), <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(data2017<span class="sc">$</span>Infant.mortality.rate)))</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function (..., exclude = if (useNA == "no") c(NA, NaN), useNA = c("no", 
+    "ifany", "always"), dnn = list.names(...), deparse.level = 1) 
+{
+    list.names &lt;- function(...) {
+        l &lt;- as.list(substitute(list(...)))[-1L]
+        if (length(l) == 1L &amp;&amp; is.list(..1) &amp;&amp; !is.null(nm &lt;- names(..1))) 
+            return(nm)
+        nm &lt;- names(l)
+        fixup &lt;- if (is.null(nm)) 
+            seq_along(l)
+        else nm == ""
+        dep &lt;- vapply(l[fixup], function(x) switch(deparse.level + 
+            1, "", if (is.symbol(x)) as.character(x) else "", 
+            deparse(x, nlines = 1)[1L]), "")
+        if (is.null(nm)) 
+            dep
+        else {
+            nm[fixup] &lt;- dep
+            nm
+        }
+    }
+    miss.use &lt;- missing(useNA)
+    miss.exc &lt;- missing(exclude)
+    useNA &lt;- if (miss.use &amp;&amp; !miss.exc &amp;&amp; !match(NA, exclude, 
+        nomatch = 0L)) 
+        "ifany"
+    else match.arg(useNA)
+    doNA &lt;- useNA != "no"
+    if (!miss.use &amp;&amp; !miss.exc &amp;&amp; doNA &amp;&amp; match(NA, exclude, 
+        nomatch = 0L)) 
+        warning("'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting")
+    args &lt;- list(...)
+    if (length(args) == 1L &amp;&amp; is.list(args[[1L]])) {
+        args &lt;- args[[1L]]
+        if (length(dnn) != length(args)) 
+            dnn &lt;- paste(dnn[1L], seq_along(args), sep = ".")
+    }
+    if (!length(args)) 
+        stop("nothing to tabulate")
+    bin &lt;- 0L
+    lens &lt;- NULL
+    dims &lt;- integer()
+    pd &lt;- 1L
+    dn &lt;- NULL
+    for (a in args) {
+        if (is.null(lens)) 
+            lens &lt;- length(a)
+        else if (length(a) != lens) 
+            stop("all arguments must have the same length")
+        fact.a &lt;- is.factor(a)
+        if (doNA) 
+            aNA &lt;- anyNA(a)
+        if (!fact.a) {
+            a0 &lt;- a
+            op &lt;- options(warn = 2)
+            a &lt;- factor(a, exclude = exclude)
+            options(op)
+        }
+        add.na &lt;- doNA
+        if (add.na) {
+            ifany &lt;- (useNA == "ifany")
+            anNAc &lt;- anyNA(a)
+            add.na &lt;- if (!ifany || anNAc) {
+                ll &lt;- levels(a)
+                if (add.ll &lt;- !anyNA(ll)) {
+                  ll &lt;- c(ll, NA)
+                  TRUE
+                }
+                else if (!ifany &amp;&amp; !anNAc) 
+                  FALSE
+                else TRUE
+            }
+            else FALSE
+        }
+        if (add.na) 
+            a &lt;- factor(a, levels = ll, exclude = NULL)
+        else ll &lt;- levels(a)
+        a &lt;- as.integer(a)
+        if (fact.a &amp;&amp; !miss.exc) {
+            ll &lt;- ll[keep &lt;- which(match(ll, exclude, nomatch = 0L) == 
+                0L)]
+            a &lt;- match(a, keep)
+        }
+        else if (!fact.a &amp;&amp; add.na) {
+            if (ifany &amp;&amp; !aNA &amp;&amp; add.ll) {
+                ll &lt;- ll[!is.na(ll)]
+                is.na(a) &lt;- match(a0, c(exclude, NA), nomatch = 0L) &gt; 
+                  0L
+            }
+            else {
+                is.na(a) &lt;- match(a0, exclude, nomatch = 0L) &gt; 
+                  0L
+            }
+        }
+        nl &lt;- length(ll)
+        dims &lt;- c(dims, nl)
+        if (prod(dims) &gt; .Machine$integer.max) 
+            stop("attempt to make a table with &gt;= 2^31 elements")
+        dn &lt;- c(dn, list(ll))
+        bin &lt;- bin + pd * (a - 1L)
+        pd &lt;- pd * nl
+    }
+    names(dn) &lt;- dnn
+    bin &lt;- bin[!is.na(bin)]
+    if (length(bin)) 
+        bin &lt;- bin + 1L
+    y &lt;- array(tabulate(bin, pd), dims, dimnames = dn)
+    class(y) &lt;- "table"
+    y
+}
+&lt;bytecode: 0x00000205bebcec78&gt;
+&lt;environment: namespace:base&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> <span class="fu">flextable</span>(table0)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> <span class="fu">add_header_row</span>(</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> table, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Median Difference in Mortality between Countries exposed to vs not exposed to Armed Conflict in 2017"</span>),</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">colwidths =</span> <span class="fu">c</span>(<span class="dv">5</span>))</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> <span class="fu">theme_box</span>(table)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div class="tabwid"><style>.cl-047324fa{}.cl-0463d694{font-family:'Arial';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-0463d6b2{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-04685e1c{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-04685e26{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-04687582{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-0468758c{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-0468758d{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-04687596{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-047324fa"><thead><tr style="overflow-wrap:break-word;"><th colspan="5" class="cl-04687582"><p class="cl-04685e1c"><span class="cl-0463d694">Median Difference in Mortality between Countries exposed to vs not exposed to Armed Conflict in 2017</span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-04687582"><p class="cl-04685e1c"><span class="cl-0463d694">Mortality_Group</span></p></th><th class="cl-0468758c"><p class="cl-04685e26"><span class="cl-0463d694">Median_Difference</span></p></th><th class="cl-0468758c"><p class="cl-04685e26"><span class="cl-0463d694">Confidence_Interval_lower</span></p></th><th class="cl-0468758c"><p class="cl-04685e26"><span class="cl-0463d694">Confidence_Interval_upper</span></p></th><th class="cl-0468758c"><p class="cl-04685e26"><span class="cl-0463d694">n</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-0468758d"><p class="cl-04685e1c"><span class="cl-0463d6b2">maternal</span></p></td><td class="cl-04687596"><p class="cl-04685e26"><span class="cl-0463d6b2">125.0</span></p></td><td class="cl-04687596"><p class="cl-04685e26"><span class="cl-0463d6b2">40.000000</span></p></td><td class="cl-04687596"><p class="cl-04685e26"><span class="cl-0463d6b2">275.24991</span></p></td><td class="cl-04687596"><p class="cl-04685e26"><span class="cl-0463d6b2">182</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-04687582"><p class="cl-04685e1c"><span class="cl-0463d6b2">infant</span></p></td><td class="cl-0468758c"><p class="cl-04685e26"><span class="cl-0463d6b2">19.8</span></p></td><td class="cl-0468758c"><p class="cl-04685e26"><span class="cl-0463d6b2">7.187426</span></p></td><td class="cl-0468758c"><p class="cl-04685e26"><span class="cl-0463d6b2">30.05279</span></p></td><td class="cl-0468758c"><p class="cl-04685e26"><span class="cl-0463d6b2">182</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-04687582"><p class="cl-04685e1c"><span class="cl-0463d6b2">neonatal</span></p></td><td class="cl-0468758c"><p class="cl-04685e26"><span class="cl-0463d6b2">28.9</span></p></td><td class="cl-0468758c"><p class="cl-04685e26"><span class="cl-0463d6b2">8.118561</span></p></td><td class="cl-0468758c"><p class="cl-04685e26"><span class="cl-0463d6b2">44.60000</span></p></td><td class="cl-0468758c"><p class="cl-04685e26"><span class="cl-0463d6b2">182</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-04687582"><p class="cl-04685e1c"><span class="cl-0463d6b2">under5</span></p></td><td class="cl-0468758c"><p class="cl-04685e26"><span class="cl-0463d6b2">12.4</span></p></td><td class="cl-0468758c"><p class="cl-04685e26"><span class="cl-0463d6b2">6.400000</span></p></td><td class="cl-0468758c"><p class="cl-04685e26"><span class="cl-0463d6b2">20.50000</span></p></td><td class="cl-0468758c"><p class="cl-04685e26"><span class="cl-0463d6b2">182</span></p></td></tr></tbody></table></div>
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
