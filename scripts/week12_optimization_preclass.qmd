@@ -1,0 +1,25 @@
+---
+title: "CHL7001H F3: Statistical Programming and Computation in Health Data"
+author: "Week 12 Pre-class Assignment"
+date: "2023-11-27"
+format: pdf
+---
+
+In next week's class, we will use the `optimx` package to estimate the parameters of a logistic regression and compare the results to those obtained from the base `glm()` function. To prepare for this class, you need to prepare the data so that the following model can be fit:
+
+$$
+\text{logit}\left\{Pr(Y_{i} = 1)\right\} \beta_0 + \beta_1 E_{i} + \beta_2 D_{i}
+$$
+where 
+
+* $Y_{i} = 1$ represents the **existence of an armed conflict in 2018** for country $i$ and $Y_{i} = 0$ otherwise
+* $E_{i} = 1$ if country $i$ **ever** had an earthquake between 2010 and 2017 and $E_{i} = 0$ otherwise
+* $D_{i} = 1$ if country $i$ **ever** had a drought between 2010 and 2017 and $D_{i} = 0$ otherwise
+
+1. Prepare the data (\* *Remember that the armed conflict variable was lagged by one year when creating the final data!*)
+2. Fit the logistic regression model using the `glm()` function in R
+3. Complete the quiz
+4. Install `optimx` from CRAN
+
+
+
